@@ -9,7 +9,7 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@mdi/font": "7.0.96",
+    "@mdi/font": "^7.3.67",
     "axios": "^1.5.1",
     "core-js": "^3.29.0",
     "element-plus": "^2.3.14",
@@ -21,6 +21,7 @@
     "vuetify": "^3.0.0"
   },
   "devDependencies": {
+    "@mdi/js": "^7.3.67",
     "@vitejs/plugin-vue": "^4.0.0",
     "eslint": "^8.37.0",
     "eslint-plugin-vue": "^9.3.0",
