@@ -65,7 +65,7 @@
           <v-spacer></v-spacer>
           <v-text-field
             density="compact"
-            variant="solo"
+            variant="small"
             label="Search"
             append-inner-icon="mdi-magnify"
             single-line
@@ -76,17 +76,17 @@
           <v-icon>mdi-dots-vertical</v-icon>
 
         </v-app-bar>
+
+
+        </v-container>
+        <v-main>
           <v-app overlaps="" style="width: 100%; height: 100vh;" flax>
             <router-view></router-view>
           </v-app>
-
-        </v-container>
-
+        </v-main>
 
       </v-card>
-
     </v-layout>
-
   </v-container>
 </template>
 
