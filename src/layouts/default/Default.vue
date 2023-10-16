@@ -45,6 +45,7 @@
 
         <!-- navbar  -->
         <v-container fluid="true" style="margin-top: 40px;border-style: none">
+<<<<<<< HEAD
           <v-app-bar color="gray">
             <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon>
             <v-app-bar-title style="margin-right:200px">Application Bar</v-app-bar-title>
@@ -56,14 +57,34 @@
 
           </v-app-bar>
 
+=======
+
+          <v-app-bar  color="gray">
+          <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon>
+          <v-app-bar-title style="margin-right:200px" >Application Bar</v-app-bar-title>
+          <v-spacer></v-spacer>
+          <v-text-field
+            density="compact"
+            variant="small"
+            label="Search"
+            append-inner-icon="mdi-magnify"
+            single-line
+            hide-details
+            flat>
+          </v-text-field>
+          <v-icon class="mr-4">mdi-bell</v-icon>
+          <v-icon>mdi-dots-vertical</v-icon>
+
+        </v-app-bar>
+        <!-- dashboard -->
+>>>>>>> origin/dev
 
         </v-container>
         <v-main>
-          <v-app overlaps="" style="width: 100%; height: 100vh;" flax>
+          <v-app-bar overlaps="" style="width: 100%; height: 100vh;" flax>
             <router-view></router-view>
-          </v-app>
+          </v-app-bar>
         </v-main>
-
       </v-card>
     </v-layout>
   </v-container>
