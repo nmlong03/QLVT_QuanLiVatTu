@@ -70,21 +70,19 @@
             append-inner-icon="mdi-magnify"
             single-line
             hide-details
-            flat
-    >      </v-text-field>
+            flat>
+          </v-text-field>
           <v-icon class="mr-4">mdi-bell</v-icon>
           <v-icon>mdi-dots-vertical</v-icon>
 
         </v-app-bar>
-
-
+        <!-- dashboard -->
         </v-container>
         <v-main>
-          <v-app overlaps="" style="width: 100%; height: 100vh;" flax>
+          <v-app-bar overlaps="" style="width: 100%; height: 100vh;" flax>
             <router-view></router-view>
-          </v-app>
+          </v-app-bar>
         </v-main>
-
       </v-card>
     </v-layout>
   </v-container>
