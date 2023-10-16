@@ -23,6 +23,7 @@
               size="large"
               start
             />
+5
 
             Components
           </v-btn>
