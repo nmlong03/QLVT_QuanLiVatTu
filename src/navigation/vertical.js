@@ -38,8 +38,13 @@ export const MENU_NAVIGATION = [
   {
     dropText: "Thống kê",
     icon: "mdi-alarm-panel",
+    children: [{ title: "Thống kê doanh thu", path: "/thong-ke-doanh-thu" }],
+  },
+  {
+    dropText: "Nhân Viên",
+    icon: "mdi-account-cog",
     children: [
-      { title: "Thống kê doanh thu", path: "/thong-ke-doanh-thu" },
+      { title: "Tạo tài khoản nhân viên ", path: "/tao-tai-khoan-nhan-vien" },
     ],
   },
 ];
