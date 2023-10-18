@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <v-container>
     <v-layout>
       <v-card min-width="100%" variant="text">
@@ -98,7 +97,6 @@
       </v-card>
     </v-layout>
   </v-container>
-=======
   <v-layout>
     <v-navigation-drawer
       v-model="drawer"
@@ -171,7 +169,6 @@
       <router-view></router-view>
     </v-main>
   </v-layout>
->>>>>>> origin/dev
 </template>
 
 <script setup>
