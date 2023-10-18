@@ -1,4 +1,4 @@
-export const MENU_NAVIGATION = [
+export const menu_vertical = [
   {
     dropText: "Chi tiết vật tư",
     icon: "mdi-archive-search",

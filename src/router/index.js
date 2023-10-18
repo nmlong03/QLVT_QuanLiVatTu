@@ -14,34 +14,7 @@ const routes = [
         path: '/staff',
          component: () => import('@/components/Staff.vue'),
       },
-      {
-        path: 'danh-sach-vat-tu',
-        // component: () => import('@/'),
-      },
-      {
-        path: 'thong-tin-vat-tu',
-        // component: () => import('@/'),
-      },
-      {
-        path: 'danh-sach-khach-hang-thue',
-        // component: () => import('@/'),
-      },
-      {
-        path: 'xuat-hoa-don',
-        // component: () => import('@/'),
-      },
-      {
-        path: 'thong-ke-hoa-don',
-        // component: () => import('@/'),
-      },
-      {
-        path: 'danh-sach-lich-su-giao-dich',
-        // component: () => import('@/'),
-      },
-      {
-        path: 'thong-ke-doanh-thu',
-        // component: () => import('@/'),
-      },
+
 
 
     ],
