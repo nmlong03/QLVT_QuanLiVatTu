@@ -1,9 +1,9 @@
-export const MENU_NAVIGATION = [
+export const menu_vertical = [
   {
     dropText: "Chi tiết vật tư",
     icon: "mdi-archive-search",
     children: [
-      { title: "Danh sách vật tư", path: "/danh-sach-vat-tu" },
+      { title: "Danh sách vật tư", path: "/" },
       { title: "Thêm thông tin vật tư", path: "/thong-tin-vat-tu" },
     ],
   },
