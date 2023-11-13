@@ -3,11 +3,12 @@ export const menu_vertical = [
     dropText: "Chi tiết vật tư",
     icon: "mdi-archive-search",
     children: [
-      { title: "Danh sách vật tư", path: "/" },
+      { title: "Danh sách vật tư", path: "/admin/list-product" },
       { title: "Thêm thông tin vật tư", path: "/thong-tin-vat-tu" },
     ],
   },
   {
+
     dropText: "Khách hàng",
     icon: "mdi-account-file-text",
     children: [
