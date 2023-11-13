@@ -27,6 +27,15 @@ export const menu_vertical = [
     ],
   },
   {
+    dropText:"Hợp Đồng",
+    icon:" mdi-receipt-text-clock-outline",
+    children:[
+      {title:"Danh sách hợp đồng",path:"/admin/contract"},
+      {title:"Lập hợp đồng",path:"/lap-hop-dong"},
+
+    ],
+  },
+  {
     dropText: "Lịch sử giao dịch",
     icon: "mdi-book-open-outline",
     children: [
@@ -45,7 +54,7 @@ export const menu_vertical = [
     dropText: "Nhân Viên",
     icon: "mdi-account-cog",
     children: [
-      { title: "Tạo tài khoản nhân viên ", path: "/tao-tai-khoan-nhan-vien" },
+      { title: "Tạo tài khoản nhân viên ", path: "/admin/account" },
     ],
   },
 ];

@@ -4,21 +4,25 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/admin',
-    redirect: '/admin/home',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
         path: 'home',
-        component: () => import('@/views/HomePage.vue'),
+        component: () => import('@/HomePage.vue'),
+      },
+      {
+        path: 'account',
+         component: () => import('@/components/StaffAccount.vue'),
+      },
+      {
+        path: 'contract',
+        component: () => import('@/components/ListContract.vue'),
       },
       {
         path: 'list-product',
         component: () => import('@/views/products/ListProduct.vue')
       },
-      {
-        path: 'test',
-        component: () => import('@/views/Test.vue')
-      }
+
 
 
     ],

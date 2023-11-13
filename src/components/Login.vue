@@ -1,5 +1,8 @@
 <template>
   <div style="height: 100vh; padding-top: 5%">
+    <v-snackbar v-model="snackbar" color="red">
+      Đăng nhập thành công
+    </v-snackbar>
     <div
       style="
         display: flex;
@@ -86,27 +89,25 @@
 import { ref, reactive } from "vue";
 const visible = ref(false);
 import { userStore } from "@/store/user";
-const store = userStore()
+const store = userStore();
 import { useForm } from "vee-validate";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
 
-const {values, defineComponentBinds, handleSubmit} = useForm();
+const { values, defineComponentBinds, handleSubmit } = useForm();
 const formData = reactive({
   email: defineComponentBinds("email"),
   password: defineComponentBinds("password"),
 });
 const login = handleSubmit(async () => {
   const payload = { ...values };
-  const res = await store.login(payload)
-  if(res.success == true){
-    toast.success("Login successfully")
+  const res = await store.login(payload);
+  if (res.success == true) {
+    toast.success("Login successfully");
   }
-  if(res.response.data.success == false){
-    toast.error(res.response.data.message)
-    
+  if (res.response.data.success == false) {
+    toast.error(res.response.data.message);
   }
 });
-
 </script>
