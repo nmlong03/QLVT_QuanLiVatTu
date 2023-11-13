@@ -18,7 +18,14 @@ const routes = [
         path: 'contract',
         component: () => import('@/components/ListContract.vue'),
       },
-
+      {
+        path: 'list-product',
+        component: () => import('@/views/products/ListProduct.vue')
+      },
+      {
+        path: 'test',
+        component: () => import('@/views/Test.vue')
+      }
 
 
     ],
