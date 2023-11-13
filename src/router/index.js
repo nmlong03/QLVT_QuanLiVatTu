@@ -22,10 +22,7 @@ const routes = [
         path: 'list-product',
         component: () => import('@/views/products/ListProduct.vue')
       },
-      {
-        path: 'test',
-        component: () => import('@/views/Test.vue')
-      }
+
 
 
     ],
