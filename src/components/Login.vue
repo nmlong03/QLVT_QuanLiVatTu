@@ -30,6 +30,7 @@
         Email
       </div>
       <v-text-field
+        v-bind="formData.email"
         density="compact"
         placeholder="Nhập email"
         prepend-inner-icon="mdi-email-outline"
@@ -43,6 +44,7 @@
       </div>
       <div>
         <v-text-field
+          v-bind="formData.password"
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           density="compact"
@@ -72,6 +74,7 @@
         color="blue"
         size="large"
         variant="tonal"
+        @click="login"
       >
         Đăng nhập
       </v-btn>
@@ -80,6 +83,30 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 const visible = ref(false);
+import { userStore } from "@/store/user";
+const store = userStore()
+import { useForm } from "vee-validate";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
+
+const {values, defineComponentBinds, handleSubmit} = useForm();
+const formData = reactive({
+  email: defineComponentBinds("email"),
+  password: defineComponentBinds("password"),
+});
+const login = handleSubmit(async () => {
+  const payload = { ...values };
+  const res = await store.login(payload)
+  if(res.success == true){
+    toast.success("Login successfully")
+  }
+  if(res.response.data.success == false){
+    toast.error(res.response.data.message)
+    
+  }
+});
+
 </script>

@@ -1,50 +1,39 @@
-import axios from 'axios';
-import {ElMessage} from 'element-plus';
-
-import { getToken, setToken } from '@/utils/auth';
-
-// Create axios instance
+import axios from "axios";
+import { getToken, setToken } from "./auth";
 const service = axios.create({
-  baseURL: import.meta.env.VITE_API,
-  // timeout: 1000, // Request timeout
-});
-
-// request拦截器
-service.interceptors.request.use(
-  config => {
-    const token = getToken();
-    if (token) {
-      config.headers['Authorization'] = 'Bearer ' + getToken(); // Set JWT token
+    baseURL: import.meta.env.VITE_API,
+    headers: {
+        'Content-Type': 'application/json',
+        // Add any other default headers you need
+      },
+})
+// Add a request interceptor
+service.interceptors.request.use(function (config) {
+    config => {
+      const token = getToken();
+      if(token) {
+        config.headers['Authorization'] = 'Bearer ' + getToken();
+      }
     }
-
+    // Do something before request is sent
     return config;
-  },
-  error => {
+  }, function (error) {
     // Do something with request error
-    console.log(error); // for debug
-    Promise.reject(error);
-  }
-);
-
-// response pre-processing
-service.interceptors.response.use(
-  response => {
-    if (response.headers.authorization) {
-      setToken(response.headers.authorization);
-      response.data.token = response.headers.authorization;
-    }
-
-    return response.data;
-  },
-  error => {
-    console.log('err' + error); // for debug
-    ElMessage({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000,
-    });
     return Promise.reject(error);
-  }
-);
+  });
 
-export default service;
+// Add a response interceptor
+service.interceptors.response.use(function (response) {
+  if(response.headers.authorization){
+    setToken(response.headers.authorization)
+    response.data.token = response.headers.authorization
+  }
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response.data;
+  }, function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+  });
+export default service
