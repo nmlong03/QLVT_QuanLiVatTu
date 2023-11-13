@@ -8,10 +8,13 @@ export const menu_vertical = [
     ],
   },
   {
-
     dropText: "Khách hàng",
     icon: "mdi-account-file-text",
     children: [
+      {
+        title: "Danh sách khách hàng",
+        path: "/admin/list-customer",
+      },
       {
         title: "Danh sách khách hàng đã thuê",
         path: "/danh-sach-khach-hang-thue",
@@ -27,12 +30,11 @@ export const menu_vertical = [
     ],
   },
   {
-    dropText:"Hợp Đồng",
-    icon:" mdi-receipt-text-clock-outline",
-    children:[
-      {title:"Danh sách hợp đồng",path:"/admin/contract"},
-      {title:"Lập hợp đồng",path:"/lap-hop-dong"},
-
+    dropText: "Hợp Đồng Thương Mại",
+    icon: "mdi-application-outline",
+    children: [
+      { title: "Danh Sách Hợp Đồng", path: "/admin/list-contract" },
+      { title: "Ký Hợp Đồng", path: "/ky-hop-dong" },
     ],
   },
   {
@@ -41,7 +43,7 @@ export const menu_vertical = [
     children: [
       {
         title: "Danh sách lịch sử giao dịch",
-        path: "/danh-sach-lich-su-giao-dich",
+        path: "/admin/list-history",
       },
     ],
   },
@@ -53,8 +55,6 @@ export const menu_vertical = [
   {
     dropText: "Nhân Viên",
     icon: "mdi-account-cog",
-    children: [
-      { title: "Tạo tài khoản nhân viên ", path: "/admin/account" },
-    ],
+    children: [{ title: "Tạo tài khoản nhân viên ", path: "/admin/account" }],
   },
 ];
