@@ -34,10 +34,15 @@ const routes = [
         path: "list-contract",
         component: () => import("@/views/contract/ListContract.vue"),
       },
+      {
+        path: 'list-categories',
+        component: () => import('@/views/categorires/ListCategories.vue')
+      },
     ],
   },
   {
     path: "/",
+    
     component: () => import("@/components/Login.vue"),
   },
 ];

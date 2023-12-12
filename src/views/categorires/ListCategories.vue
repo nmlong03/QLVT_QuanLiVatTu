@@ -38,13 +38,13 @@
         append-icon="mdi-plus"
         @click="toggleSix"
       >
-        Thêm sản phẩm
+        Thêm loại sản phẩm
       </v-btn>
-      <dialogProduct />
+      <dialogCategories />
     </div>
     <!-- content -->
     <div style="margin-right: 50px;">
-      <h1 class="ma-5 text-center">Danh sách vật tư</h1>
+      <h1 class="ma-5 text-center">Danh sách loại vật tư</h1>
       <v-data-table
         v-model:page="page"
         :headers="headers"
@@ -58,16 +58,6 @@
         <template #[`item.image`]="{ item }">
           <div>
             <v-img :src="item.image" width="60"></v-img>
-          </div>
-        </template>
-        <template #[`item.images`]="{ item }">
-          <div v-for="image in item.images" :key="image.image_path">
-            <v-img :src="image.image_path" width="60"></v-img>
-          </div>
-        </template>
-        <template #[`item.qr_code`]="{ item }">
-          <div >
-            <v-img :src="item.qr_code" width="60"></v-img>
           </div>
         </template>
         <template #[`item.actions`]>
@@ -94,8 +84,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import dialogProduct from "@/components/dialog/Product.vue"
-
+import dialogCategories from "@/components/dialog/Category.vue";
 import { productStore } from "@/store/product";
 
 //store
@@ -121,30 +110,11 @@ const page = ref(1);
 const headers = [
   { title: "STT", key: "id", sortable: false, searchable: true },
   { title: "Ảnh", key: "image", sortable: false },
-  { title: "Ảnh", key: "images", sortable: false },
-  { title: "Tên sản phẩm", key: "name", sortable: false, searchable: true },
-  { title: "Giá sản phẩm", key: "price", sortable: false, searchable: true },
-  { title: "Chi tiết", key: "description", sortable: false, searchable: true },
-  { title: "Qr Code", key: "qr_code", sortable: false, searchable: true },
+  { title: "Tên loại sản phẩm", key: "name", sortable: false, searchable: true },
   { title: "", key: "actions" },
 ];
 const search = ref("");
 
-//
-// const filteredDesserts = computed(() => {
-//   const keyword = search.value.toLowerCase();
-//   if (keyword) {
-//     return desserts.value.filter((dessert) => {
-//       for (const header of headers) {
-//             if (header.searchable && String(dessert[header.key]).toLowerCase().includes(keyword)) {
-//               return true;
-//             }
-//           }
-//       return false;
-//     });
-//   }
-//   return desserts;
-// });
 </script>
 <style lang="scss">
 .none-border-color .v-field--variant-filled .v-field__overlay {
