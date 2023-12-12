@@ -117,7 +117,6 @@
 import { ref, computed, onMounted, reactive } from "vue";
 import { useForm } from "vee-validate";
 import { useToast } from "vue-toastification";
-import * as yup from "yup";
 
 const newImage = ref("");
 const newImages = ref("");
@@ -183,6 +182,10 @@ const previewFilesQrCode = (event) => {
   };
   theReader.readAsDataURL(file);
 };
+
+
+
+
 const previewFilesImages = (event) => {
   const files = event.target.files; // Sử dụng FileList thay vì chỉ lấy file đầu tiên
   for (let i = 0; i < files.length; i++) {
@@ -207,6 +210,9 @@ const addProduct = handleSubmit(async () => {
   appendFormData(formData, "qr_code", qr_code.value);
   appendFormData(formData, "image", image.value);
 
+
+
+
   if (Array.isArray(images.value)) {
     images.value.forEach((image, index) => {
       appendFormData(formData, `images[${index}]`, image);
@@ -219,7 +225,6 @@ const addProduct = handleSubmit(async () => {
 
   if (res.product) {
     toast.success("Tạo sản phẩm thành công");
-    console.log('res', res);
     toggle();
   }
 });
