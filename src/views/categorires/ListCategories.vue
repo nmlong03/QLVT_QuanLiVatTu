@@ -38,16 +38,15 @@
         append-icon="mdi-plus"
         @click="toggleSix"
       >
-        Thêm sản phẩm
+        Thêm loại sản phẩm
       </v-btn>
-      <dialogProduct />
+      <dialogCategories />
     </div>
-    <!-- content -->
-    <div style="margin-right: 50px">
-      <h1 class="ma-5 text-center">Danh sách vật tư</h1>
+    <div style="margin-right: 50px;">
+      <h1 class="ma-5 text-center">Danh sách loại vật tư</h1>
       <v-data-table
         v-model:page="page"
-        :headers="horizontal"
+        :headers="headers"
         :items="desserts"
         :items-per-page="5"
         :search="search"
@@ -60,17 +59,7 @@
             <v-img :src="item.image" width="60"></v-img>
           </div>
         </template>
-        <template #[`item.images`]="{ item }">
-          <div v-for="image in item.images" :key="image.image_path">
-            <v-img :src="image.image_path" width="60"></v-img>
-          </div>
-        </template>
-        <template #[`item.qr_code`]="{ item }">
-          <div>
-            <v-img :src="item.qr_code" width="60"></v-img>
-          </div>
-        </template>
-        <template #[`item.actions`]="{ item }">
+        <template #[`item.actions`]>
           <div class="gap">
             <v-btn
               icon="mdi-book-edit"
@@ -78,21 +67,13 @@
               size="small"
               class="mx-2"
             ></v-btn>
-            <v-btn
-              icon="mdi-delete"
-              color="error"
-              size="small"
-              @click="handleDelete(item.id)"
-            ></v-btn>
+            <v-btn icon="mdi-delete" color="error" size="small" @click="confirmDelete"></v-btn>
           </div>
         </template>
 
         <template v-slot:bottom>
           <div class="text-center pt-2" style="margin-right: 50px">
-            <v-pagination
-              v-model="page"
-              :length="paginationLength"
-            ></v-pagination>
+            <v-pagination v-model="page" :length="desserts.length/5"></v-pagination>
           </div>
         </template>
       </v-data-table>
@@ -101,61 +82,44 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from "vue";
-import dialogProduct from "@/components/dialog/Product.vue";
-import { horizontal } from "@/views/products/horizontal";
-import { useToast } from "vue-toastification";
-
-const toast = useToast();
+// import { ref, computed, onMounted } from "vue";
+import { ref } from "vue";
+import dialogCategories from "@/components/dialog/Category.vue";
+// import { productStore } from "@/store/product";
 
 //store
 import { useApp } from "@/store/app";
-import { productStore } from "@/store/product";
-
 const appStore = useApp();
 const toggleSix = () => {
   appStore.isToggle();
 };
 
-const store = productStore();
-const desserts = computed(() => {
-  return store.products;
-});
-const paginationLength = ref(0);
-console.log("g", paginationLength.value);
-watch(desserts, (newDesserts, oldDesserts) => {
-  paginationLength.value = Math.ceil(newDesserts.length / 5);
-});
-onMounted(() => {
-  store.fetchProducts();
-});
 
-const handleDelete = async (id) => {
-  await store
-    .deleteProduct(id)
-    .then(() => toast.success("Xóa sản phẩm thành công"));
-};
+// const store = productStore();
+// const desserts = computed(() => {
+//   return store.products;
+// });
+// onMounted(() => {
+//   store.fetchProducts();
+// });
 
+const desserts = [
+  {name: "long", image: 'ddd'}
+]
+const confirmDelete = () => {
+  const res = confirm("đlee");
+  console.log(res);
+}
 //
 const page = ref(1);
-
+const headers = [
+  { title: "STT", key: "id", sortable: false, searchable: true },
+  { title: "Ảnh", key: "image", sortable: false },
+  { title: "Tên loại sản phẩm", key: "name", sortable: false, searchable: true },
+  { title: "", key: "actions" },
+];
 const search = ref("");
 
-//
-// const filteredDesserts = computed(() => {
-//   const keyword = search.value.toLowerCase();
-//   if (keyword) {
-//     return desserts.value.filter((dessert) => {
-//       for (const header of headers) {
-//             if (header.searchable && String(dessert[header.key]).toLowerCase().includes(keyword)) {
-//               return true;
-//             }
-//           }
-//       return false;
-//     });
-//   }
-//   return desserts;
-// });
 </script>
 <style lang="scss">
 .none-border-color .v-field--variant-filled .v-field__overlay {

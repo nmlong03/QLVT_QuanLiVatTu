@@ -15,11 +15,12 @@
         <router-link to="/list-categories">
           <v-list-item
             prepend-icon="mdi-archive"
-            @click="console.log('clicked')"
           >
+          <router-link to="/admin/list-categories">
             <v-list-item-title style="margin-left: 10px; font-weight: bold"
               >Loại vật tư</v-list-item-title
             >
+          </router-link>
           </v-list-item>
         </router-link>
         <v-list-group v-for="(item, index) of menu_vertical" :key="index">

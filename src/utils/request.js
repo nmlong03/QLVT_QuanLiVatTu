@@ -4,6 +4,7 @@ const service = axios.create({
     baseURL: import.meta.env.VITE_API,
     headers: {
         'Content-Type': 'application/json',
+
         // Add any other default headers you need
       },
 })

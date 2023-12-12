@@ -8,7 +8,7 @@
     <v-form>
       <v-card>
         <v-card-title>
-          <span class="text-h5">Thêm sản phẩm</span>
+          <span class="text-h5">Thêm loại sản phẩm</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -21,51 +21,17 @@
                   v-bind="formData.name"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
-                <v-select
-                  clearable
-                  required
-                  variant="solo"
-                  class="none-border-color"
-                  label="Loại sản phẩm*"
-                  :items="categories"
-                  v-bind="formData.category_id"
-                  item-value="id"
-                  v-model="selectedCategory"
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Giá sản phẩm*"
-                  required
-                  variant="solo"
-                  v-bind="formData.price"
-                ></v-text-field>
-              </v-col>
               <v-col cols="12" class="d-flex">
                 <v-row>
-                  <v-col cols="6">
-                    <v-file-input
-                      v-bind="formData.image"
-                      chips
-                      multiple
-                      accept="image/png, image/jpeg, image/bmp"
-                      placeholder="Pick an avatar"
-                      prepend-icon="mdi-camera"
-                      label="Ảnh*"
-                      @change="previewFiles($event)"
-                    ></v-file-input>
-                    <img :src="newImage || ''" width="100" height="100" />
-                  </v-col>
                   <v-col cols="6">
                     <v-file-input
                       :rules="rules"
                       accept="image/png, image/jpeg, image/bmp"
                       placeholder="Pick an avatar"
                       prepend-icon="mdi-camera"
-                      label="Qr Code*"
+                      label="Ảnh*"
                       @change="previewFiles($event)"
+                      v-bind="formData.image"
                     ></v-file-input>
                     <img :src="newImage || ''" width="100" height="100" />
                   </v-col>
@@ -80,7 +46,7 @@
           <v-btn color="blue-darken-1" variant="text" @click="toggle">
             Close
           </v-btn>
-          <v-btn color="blue-darken-1" variant="text" @click="addProduct">
+          <v-btn color="blue-darken-1" variant="text" @click="addCategory">
             Save
           </v-btn>
         </v-card-actions>
@@ -91,7 +57,6 @@
 <script setup>
 import { ref, computed, onMounted, reactive } from "vue";
 import { useForm } from "vee-validate";
-const selectedCategory = ref(null);
 //store
 import { useApp } from "@/store/app";
 import { useCategories } from "@/store/category";
@@ -101,12 +66,10 @@ const { values, defineComponentBinds, handleSubmit } = useForm();
 
 const formData = reactive({
   name: defineComponentBinds("name"),
-  price: defineComponentBinds("price"),
-  category_id: defineComponentBinds("category_id"),
   image: defineComponentBinds("image"),
 });
 
-const addProduct = handleSubmit(async () => {
+const addCategory = handleSubmit(async () => {
   const payload = { ...values };
   console.log(payload);
 });
@@ -115,13 +78,6 @@ const isActive = computed(() => appStore.getToggle);
 const toggle = () => {
   appStore.isToggle();
 };
-const categories = computed(() => {
-  return categoryStore.getCategories.map((category) => ({
-    id: category.id,
-    name: category.name,
-  }));
-});
-
 onMounted(() => {
   categoryStore.fetchCategories();
 });
