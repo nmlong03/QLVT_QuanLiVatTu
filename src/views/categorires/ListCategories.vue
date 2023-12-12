@@ -42,7 +42,6 @@
       </v-btn>
       <dialogCategories />
     </div>
-    <!-- content -->
     <div style="margin-right: 50px;">
       <h1 class="ma-5 text-center">Danh sách loại vật tư</h1>
       <v-data-table
@@ -68,7 +67,7 @@
               size="small"
               class="mx-2"
             ></v-btn>
-            <v-btn icon="mdi-delete" color="error" size="small"></v-btn>
+            <v-btn icon="mdi-delete" color="error" size="small" @click="confirmDelete"></v-btn>
           </div>
         </template>
 
@@ -83,9 +82,10 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+// import { ref, computed, onMounted } from "vue";
+import { ref } from "vue";
 import dialogCategories from "@/components/dialog/Category.vue";
-import { productStore } from "@/store/product";
+// import { productStore } from "@/store/product";
 
 //store
 import { useApp } from "@/store/app";
@@ -95,16 +95,21 @@ const toggleSix = () => {
 };
 
 
-const store = productStore();
-const desserts = computed(() => {
-  return store.products;
-});
-onMounted(() => {
-  store.fetchProducts();
-});
+// const store = productStore();
+// const desserts = computed(() => {
+//   return store.products;
+// });
+// onMounted(() => {
+//   store.fetchProducts();
+// });
 
-
-
+const desserts = [
+  {name: "long", image: 'ddd'}
+]
+const confirmDelete = () => {
+  const res = confirm("đlee");
+  console.log(res);
+}
 //
 const page = ref(1);
 const headers = [

@@ -43,11 +43,11 @@
       <dialogProduct />
     </div>
     <!-- content -->
-    <div style="margin-right: 50px;">
+    <div style="margin-right: 50px">
       <h1 class="ma-5 text-center">Danh sách vật tư</h1>
       <v-data-table
         v-model:page="page"
-        :headers="headers"
+        :headers="horizontal"
         :items="desserts"
         :items-per-page="5"
         :search="search"
@@ -66,11 +66,11 @@
           </div>
         </template>
         <template #[`item.qr_code`]="{ item }">
-          <div >
+          <div>
             <v-img :src="item.qr_code" width="60"></v-img>
           </div>
         </template>
-        <template #[`item.actions`]>
+        <template #[`item.actions`]="{ item }">
           <div class="gap">
             <v-btn
               icon="mdi-book-edit"
@@ -78,13 +78,21 @@
               size="small"
               class="mx-2"
             ></v-btn>
-            <v-btn icon="mdi-delete" color="error" size="small"></v-btn>
+            <v-btn
+              icon="mdi-delete"
+              color="error"
+              size="small"
+              @click="handleDelete(item.id)"
+            ></v-btn>
           </div>
         </template>
 
         <template v-slot:bottom>
           <div class="text-center pt-2" style="margin-right: 50px">
-            <v-pagination v-model="page" :length="desserts.length/5"></v-pagination>
+            <v-pagination
+              v-model="page"
+              :length="paginationLength"
+            ></v-pagination>
           </div>
         </template>
       </v-data-table>
@@ -93,41 +101,44 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
-import dialogProduct from "@/components/dialog/Product.vue"
+import { ref, computed, onMounted, watch } from "vue";
+import dialogProduct from "@/components/dialog/Product.vue";
+import { horizontal } from "@/views/products/horizontal";
+import { useToast } from "vue-toastification";
 
-import { productStore } from "@/store/product";
+const toast = useToast();
 
 //store
 import { useApp } from "@/store/app";
+import { productStore } from "@/store/product";
+
 const appStore = useApp();
 const toggleSix = () => {
   appStore.isToggle();
 };
 
-
 const store = productStore();
 const desserts = computed(() => {
   return store.products;
+});
+const paginationLength = ref(0);
+console.log("g", paginationLength.value);
+watch(desserts, (newDesserts, oldDesserts) => {
+  paginationLength.value = Math.ceil(newDesserts.length / 5);
 });
 onMounted(() => {
   store.fetchProducts();
 });
 
-
+const handleDelete = async (id) => {
+  await store
+    .deleteProduct(id)
+    .then(() => toast.success("Xóa sản phẩm thành công"));
+};
 
 //
 const page = ref(1);
-const headers = [
-  { title: "STT", key: "id", sortable: false, searchable: true },
-  { title: "Ảnh", key: "image", sortable: false },
-  { title: "Ảnh", key: "images", sortable: false },
-  { title: "Tên sản phẩm", key: "name", sortable: false, searchable: true },
-  { title: "Giá sản phẩm", key: "price", sortable: false, searchable: true },
-  { title: "Chi tiết", key: "description", sortable: false, searchable: true },
-  { title: "Qr Code", key: "qr_code", sortable: false, searchable: true },
-  { title: "", key: "actions" },
-];
+
 const search = ref("");
 
 //
