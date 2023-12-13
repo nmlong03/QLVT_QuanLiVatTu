@@ -10,15 +10,7 @@ export const productStore = defineStore("products", {
     }
   },
   actions: {
-    async fetchProducts() {
-      try {
-        const data = await request.get('/products')
-        this.products = data.products
-      }
-      catch (error) {
-        return error
-      }
-    },
+
     async addProducts(payload) {
       try {
         const res = await request.post('/products', payload, {
@@ -42,6 +34,16 @@ export const productStore = defineStore("products", {
         return error
       }
     },
+    async fetchProducts() {
+      try {
+        const data = await request.get('/products')
+        this.products = data.products
+      }
+      catch (error) {
+        return error
+      }
+    },
+
 
   },
 })
